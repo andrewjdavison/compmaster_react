@@ -1,0 +1,16 @@
+{
+  "name": "compmaster",
+  "version": "9.0.0",
+  "description": "CompMaster",
+  "main": "index.js",
+  "repository": "https://github.com/andrewjdavison/compmaster_react.git",
+  "author": "Andrew J Davison",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.2"
+  },
+  "scripts" : {
+    "start": "node index.js"
+  }
+}
