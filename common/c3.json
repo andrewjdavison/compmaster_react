@@ -1,0 +1,32 @@
+{"countries":
+[
+    {
+        "code": "US",
+        "id": 1,
+        "name": "United States",
+        "states": [
+            {
+                "code": "AK",
+                "id": 1,
+                "countryId": 1,
+                "name": "Alaska",
+                "coordinates": "64.200841,-149.493673"
+            }
+        ]
+    },
+    {
+        "code": "CA",
+        "id": 2,
+        "name": "Canada",
+        "states": [
+            {
+                "code": "AB",
+                "id": 60,
+                "countryId": 2,
+                "name": "Alberta",
+                "coordinates": "53.933271,-116.576504"
+            }
+        ]
+    }
+]
+}

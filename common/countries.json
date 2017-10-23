@@ -1,0 +1,32 @@
+{"countries":
+[
+    {
+        "code": "US",
+        "id": 1,
+        "name": "United States",
+        "relationships": {
+          "states":{[
+            "id": 1,
+            "name": "state1",
+            "coordinates" : "none",
+            "countryId":1
+          ]
+          }
+        }
+    },
+    {
+        "code": "CA",
+        "id": 2,
+        "name": "Canada",
+        "relationships": {
+          "states":{[
+            "id": 1,
+            "name": "state1",
+            "coordinates" : "none",
+            "countryId":2
+          ]
+          }
+        }
+    }
+]
+}

@@ -1,5 +1,6 @@
 import React from 'react';
 import LoginForm from '../components/LoginForm.jsx';
+import Auth from '../modules/Auth.js';
 
 
 class LoginPage extends React.Component {
@@ -34,6 +35,38 @@ class LoginPage extends React.Component {
 
     console.log('email:', this.state.user.email);
     console.log('password:', this.state.user.password);
+
+    const email = encodeURIComponent(this.state.user.email);
+    const password =encodeURIComponent(this.state.user.password);
+    const formData = JSON.stringify({ username: email, password: password });
+
+    const xhr = new XMLHttpRequest();
+    xhr.open('post', 'auth');
+    xhr.setRequestHeader('Content-type', 'application/json');
+    xhr.responseType='json';
+    xhr.addEventListener('load', () => {
+        console.log(xhr);
+      if(xhr.status === 200) {
+        // Success
+        this.setState({
+          errors:{}
+        });
+
+        Auth.authenticateUser(xhr.response.token, xhr.response.user);
+
+        this.props.history.push('/');
+
+      } else {
+        // Failure
+
+        const errors = {summary: 'Login attempt failed... have you forgotten your password?'};
+
+        this.setState({
+          errors
+        });
+      }
+    });
+    xhr.send(formData);
   }
 
   /**

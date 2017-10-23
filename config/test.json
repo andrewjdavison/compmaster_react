@@ -1,0 +1,89 @@
+{
+  "Database" : {
+    "host" : "10.10.1.7",
+    "user" : "cmtest",
+    "password" : "abcdefg",
+    "database": "cmtest",
+    "debug" : false,
+    "drop" : true,
+    "rebuild" : true
+  },
+
+  "Database_cm6" : {
+    "host" : "compm001.mysql.guardedhost.com",
+    "user" : "compm001_live",
+    "password" : "br3w4life",
+    "database" : "compm001_cmdata_live",
+    "debug" : false
+  },
+  "const" : {
+    "INACTIVE_COMP" : 0,
+    "ACTIVE_COMP" : 1,
+    "CLOSED_COMP" : 2
+  },
+  "recaptcha": {
+    "secret": "6LeIxAcTAAAAAGG-vFI1TnRWxMZNFuojJ4WifJWe",
+    "site": "6LeIxAcTAAAAAJcZVRqyHh71UMIEGNQ_MXjiZKhI",
+    "response": "03AHJ_VusyrIe4Wyga8vOC954XJgL1PBJRrzghFZr8kvwWZVj93SkTuvYIrJvBLwybP8827SAdV5TKH3969c3dwZQVOSERghsZ1oBv8p8FcDdfpeGVfwHxLmZw6V_rMqh7SDeDjiWhugCU4GjJNbhAq_WBZPhj6C7EydW8e0KrdLZj23DiN2PAc4GFMmahowYljlucUvo9iJpl649bd1o63PpEYwmsWMRbJ2TC-_65Lt2RmDsA5ZYelKTTuR4rj8hqtJceyqwTBFfdVFbHsPz7av1LsmFlsDI83thuNTD7L5xbHivgdsqwJ4VsxThtstdJkVuveX-nqplmDJ6uDaQxjvEhysDvTG9N_0f97JjSSNnLFMNxrt5pmwJP7RJCM9gUm5H4tAJWGJb_wbmeaWwJ-xLLrhQJv2MQ_F89IBscmOr6zza9u5NbvMvyroWhrX1EsiA9J8M4vVUrhJt3CVmhEpGPg8nh51iQqHL19qMKmpsv5dL6ChHab8LG_ilFsJX9cH5oXalUx8brU2YxOrkVUTCwD6BOqsA05jPBAuLBDcGGlAgNLTNQBRpVUynXE9GZTF5e441kc4aJAtyivkqcRo5cgRRVdqZYcIdwc_uaDaQdwYkFQd1SD6HHsy9DPdg2XbI4OSrXr59uRaPFTFOrCyJ3F-B_7aaVPkdaLZzcDx016LKZvZEv_9MZw6qlJGw5ZyPlCCtmXEIC3IuZ95fKae_0D4oSGKnuOEp1sHpa4L0ml3jnd1i_KGkRNpkbjuumn1bE_N1Tl7GtmVmVtE7WMoVzsi5IiO4LMTN6ycN0W5hKar-ro5tggEojY_nu6bHNurs1HyFISohU3PR4DfJqrfKn2bhc0Pe0gHOtdwKZUMMdH4m5nsw60RYpD4RQ6Wce290N_EjHqaxErm5q5RVEAkhIz7AzIJQlGluX31BgsgR_88toegJjCXQ"
+  },
+  "version" : "TEST API Version 1.0",
+  "port"  : 4000,
+  "cmsURL" : "10.10.1.7:3000",
+  "salt" : "fdsahwiihbh5",
+  "port_https": 3444,
+  "paypal":{
+    "sdkData":{
+      "userId": "payments-facilitator_api1.compmaster.com.au",
+      "password": "Q92D4HTZGWB53HQK",
+      "signature": "AMTNZkN2vcv5n32ciVm1xlSirqbyAx9dEH0eVdX6k4bBgTbmqP.Lxifg",
+      "sandbox": "true"
+    },
+    "paymentURL": "https://svcs.sandbox.paypal.com/AdaptivePayments/",
+    "returnURL": "http://local.dev/store",
+    "cancelURL": "http://local.dev/store",
+    "AppID":"APP-80W284485P519543T"
+
+  },
+  "compmasterPaypalAccount" : "payments-facilitator_api1.compmaster.com.au",
+  "cmuser" : {
+    "username": "cmuser",
+    "password": "qpwoeirut",
+    "userId": "15624"
+  },
+  "cmuser2" : {
+    "username": "cmuser2",
+    "password": "qpwoeirut",
+    "userId": "15625"
+  },
+  "cadmin" : {
+    "username": "cadmin",
+    "password": "qpwoeirut",
+    "userId": "15623"
+  },
+  "sadmin" : {
+    "username": "sadmin",
+    "password": "qpwoeirut",
+    "userId": "15622"
+  },
+  "judgeDirector" : {
+    "username": "judgeDirector",
+    "password": "qpwoeirut",
+    "userId": "15626"
+  },
+  "compTreasurer" : {
+    "username": "compTreasurer",
+    "password": "qpwoeirut",
+    "userId": "15627"
+  },
+  "dataOfficer" : {
+    "username": "dataOfficer",
+    "password": "qpwoeirut",
+    "userId": "15628"
+  },
+  "compManager" : {
+    "username": "compManager",
+    "password": "qpwoeirut",
+    "userId": "15629"
+  }
+}
+

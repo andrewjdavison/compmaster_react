@@ -1,0 +1,8 @@
+[Unit]
+Description=cms node process
+
+Requires=multi-user.target
+After=multi-user.target
+[Service]
+Type=notify
+ExecStart=node app.js >> /var/log/cms

@@ -1,0 +1,4 @@
+var bcrypt = require('bcrypt');
+var config = require('config');
+var bcryptAsPromised = require('bcrypt-as-promised');
+

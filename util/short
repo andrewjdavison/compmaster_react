@@ -1,0 +1,7 @@
+  sql: 'INSERT INTO `compinstance` (compstate,name,address1,address2,city,state,postcode,country,mapRef,contactDetails,startDate,endDate,fullPrice,onlineDiscount,clubDiscount,
+multipleDiscount,categoryLabel,categoryReq,subcategoryLabel,subcategoryReq,entryOpenDate,entryCloseDate,scoresheetId,scoreFilePattern,paypalFixedFee,paypalVariableFee,
+compmasterFixedFee,compmasterVariableFee,gst,entries,entryLimit,tallyMode,signature,offlineSignature,scoresheetSig,scoresheetVersion,acceptingEntries,resultsPublished,
+requestingStaff,requestingJudges,requestingJudgeAssistants,allowUnpaid,lockScoresheet,validResults,lockOfflineSheet,showSponsors,hideAdmin,scoresheetsReady) VALUES (22,\'Drop-Off Dates\',
+\'<ul><li>Entries can be dropped off at the mentioned points no later than 12 Noon, Saturday June 6</li>\\r\\n<li>Entries can also be dropped off at the Terminus Hotel 
+until 1pm June 13 BUT must have been pre-registered in CompMaster by midday June 6. No entries will be permitted on the day. </li></ul>\',\'5\',?,?,?,?,?,?,?,?,?,?,?,?,?,?,
+?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);' }

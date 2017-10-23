@@ -1,0 +1,5 @@
+jade->pug
+node-uuid -> uuid
+nodemailer 
+uuid-key-generator -> uid-generator
+

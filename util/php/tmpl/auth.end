@@ -1,0 +1,21 @@
+  verifyPassword(password){
+    return bcryptAsPromised.compare(password, this.password)
+    .then((res)=>{
+      return res;
+    })
+    .catch((err)=>{
+      if(err.name == 'MismatchError'){
+        return false;
+      } else {
+        throw new Error(err);
+      }
+    });
+  }
+
+  hash(){
+    this.password=bcrypt.hashSync(this.password,10);
+  };
+
+  compare(password){
+    return bcrypt.compareSync(password, this.password);
+  };

@@ -1,0 +1,63 @@
+ssh  -i ~/.ssh/id_cm_deploy -A -p 22 root@162.243.172.229 
+
+
+" 
+  for dependency in nginx git node npm ; do 
+    if ! which \$dependency > /dev/null ; then   
+      echo error: server missing is nginx, git, node or npm ;   
+      exit 1 ; 
+    fi ; 
+  done ; 
+  if [ ! -d \"/etc/nginx/sites-enabled\" ] ; then   
+    echo error: nginx sites-enabled path /etc/nginx/sites-enabled does not exist ;   
+    exit 1 ; 
+  fi ; 
+  if ! grep -Fxq \"Host github.com\" ~/.ssh/config ; then   
+    echo -e \"Host github.com\n\tStrictHostKeyChecking no\n\" >> ~/.ssh/config ;
+  fi ;
+  if [ ! -d \"/var/www\" ] ; then   
+    mkdir -p \"/var/www\" ; 
+  fi ; 
+  stop cms >>& /var/log/nd.log  ; 
+  if [ ! -d \"/var/www/cms\" ] ; then   
+    git clone git@github.com:andrewjdavison/cms_express.git \"/var/www/cms\" >>& /var/log/nd.log ; 
+    if [ \$? -ne 0 ] ; then   
+      echo error: failed to clone git@github.com:andrewjdavison/cms_express.git ; 
+      exit 1 ; 
+    fi ; 
+  fi ; 
+  cd \"/var/www/cms\" ; 
+  git fetch >>& /var/log/nd.log  ; 
+  if [ \$? -ne 0 ] ; then   
+    echo error: failed to fetch upstream changes ; 
+    exit 1 ; 
+  fi ; 
+  git branch master origin/master >>& /var/log/nd.log  ; 
+  git checkout master -f >>& /var/log/nd.log ; 
+  if [ \$? -ne 0 ] ; then   
+    echo error: failed to checkout tracking branch master ; 
+    exit 1 ; 
+  fi ; 
+  git pull origin master >>& /var/log/nd.log  ; 
+  if [ \$? -ne 0 ] ; then   
+    echo error: failed to pull changes on master ; 
+    exit 1 ; 
+  fi ; 
+  npm install >>& /var/log/nd.log  ; 
+  if [ \$? -ne 0 ] ; then   
+    echo error: failed to install npm dependencies ; 
+    exit 1 ; 
+  fi ; 
+  cp -f \"/var/www/cms/deploy/cms\" /etc/nginx/sites-enabled/cms >>& /var/log/nd.log ; 
+  cp -f \"/var/www/cms/deploy/cms.system\" /etc/systemd/system/cms.system >>& /var/log/nd.log ; 
+  nginx -s reload >>& /var/log/nd.log  ;
+  if [ \$? -ne 0 ] ; then   
+    echo error: failed to reload nginx configuration ; 
+    exit 1 ; 
+  fi ; 
+  systemctl start cms >>& /var/log/nd.log  ; 
+  if [ \$? -ne 0 ] ; then   
+    echo error: application failed to start ; 
+    exit 1 ; 
+  fi ; 
+exit ; "

@@ -2,6 +2,8 @@
   text-align: center;
 }
 
+
+
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;
@@ -20,6 +22,14 @@
 
 .App-intro {
   font-size: large;
+}
+
+.App-frame {
+  background-image: url('./cask.jpg');
+  background-size: 100vw;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
 }
 
 @keyframes App-logo-spin {
@@ -77,6 +87,14 @@ a:hover {
   width: 700px;
 }
 
+.comp-container {
+  margin:0 20vw 0 20vw;
+}
+
+.comptile {
+  background-color: blue;
+  height: 200px;
+}
 .card-heading {
   padding: 16px;
 }

@@ -6,6 +6,7 @@ import Base from './components/Base.jsx';
 import HomePage from './components/HomePage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
 import LoginPage from './containers/LoginPage.jsx';
+import LogoutPage from './containers/LogoutPage.jsx';
 
 import './App.css';
 
@@ -20,6 +21,7 @@ class App extends Component {
               <Route exact path="/" component={ HomePage }/>
               <Route path='/login' component={ LoginPage }/>
               <Route path='/signup' component={ SignUpPage }/>
+              <Route path='/logout' component={ LogoutPage }/>
 
             </switch>
           </Base>
