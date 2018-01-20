@@ -11,14 +11,6 @@ import MenuAppBar from './components/MenuAppBar.jsx';
 import SelectCompetitionPage from './components/SelectCompetitionPage.jsx';
 import CompetitionDetailsPage from  './containers/CompetitionDetailsPage.jsx';
 
-import { connect } from 'react-redux';
-
-import {
-  loadCompetitionList,
-  loadCompetitionDetails,
-} from './redux';
-
-
 import './App.css';
 
 const theme = createMuiTheme({

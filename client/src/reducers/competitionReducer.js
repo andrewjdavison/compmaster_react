@@ -13,14 +13,6 @@ const testCompetitionListState = {
   ],
 };
 
-const newCompetitionList = [
-  ...testCompetitionListState.competitions,
-  {
-    name: 'VicBrew2',
-    id: 3,
-  }
-];
-
 const competitionReducer = (state = testCompetitionListState, action) => {
   switch (action.type) {
     case 'COMPETITION_LIST_HAS_ERRORED':

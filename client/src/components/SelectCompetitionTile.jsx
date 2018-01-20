@@ -2,8 +2,8 @@ import React from "react";
 import PropTypes from 'prop-types';
 //import { Link } from 'react-router-dom';
 //import Card, { CardText } from 'material-ui/Card';
-import Typography from 'material-ui/Typography';
-import Paper from 'material-ui/Paper';
+//import Typography from 'material-ui/Typography';
+//import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
 
 
@@ -20,9 +20,9 @@ const styles = theme => ({
 
 
 function SelectCompetitionTile(props) {
-  const { onSelect, errors, classes, competition } = props;
+  const { onSelect, competition } = props;
   return (
-    <a href="#" onClick= { (e)=>onSelect(competition.id) } >
+    <a  onClick= { (e)=>{console.log('Hi');onSelect(competition.id)} } >
       <div>{competition.name} </div>
     </a>
   );

@@ -1,14 +1,14 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
-import { withStyles } from 'material-ui/styles';
+//import { withStyles } from 'material-ui/styles';
 import SelectCompetitionTile from './SelectCompetitionTile.jsx';
 import { competitionListLoadTestData } from '../actions/competitionList.js';
 
 
 
+/*
 const styles = theme => ({
   flex: {
     flex: 1,
@@ -19,6 +19,7 @@ const styles = theme => ({
     margin: theme.spacing.unit*3,
   }),
 });
+*/
 
 function onSelect(){
 
@@ -70,7 +71,7 @@ const mapDispatchToProps = (dispatch) => {
 
 };
 
-const SelectCompetitionPage =  withStyles(styles)(SelectCompetitionForm);
+//const SelectCompetitionPage =  withStyles(styles)(SelectCompetitionForm);
 
 const SelectCompetitionContainer = connect(
   mapStateToProps,
