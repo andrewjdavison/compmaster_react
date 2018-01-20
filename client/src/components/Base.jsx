@@ -22,12 +22,11 @@ const Base = ({ children }) => (
           <Link to="/login">Log in</Link>
           <Link to="/signup">Sign up</Link>
         </div>
-      )}
+      )};
 
     </div>
     <div className="App-frame">
       {children}
-
     </div>
   </div>
 );

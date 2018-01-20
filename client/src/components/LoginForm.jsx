@@ -1,24 +1,47 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { Card, CardText } from 'material-ui/Card';
-import RaisedButton from 'material-ui/RaisedButton';
+import Card, { CardContent} from 'material-ui/Card';
+import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
+import { withStyles } from 'material-ui/styles';
 
+const styles = theme => ({
+  container: {
+    margin: 'auto',
+    textAlign: 'center',
+    width: '700px',
+  },
+  cardHeading: {
+    padding: '16px',
+  },
+  errorMessage: {
+    padding: '0 16px',
+    color: 'tomato',
+  },
+  fieldLine: {
+    padding: '16px',
+  },
+  buttonLine: {
+    padding: '16px',
+  },
+});
 
 const LoginForm = ({
-    onSubmit,
-    onChange,
-    errors,
-    user
+  onSubmit,
+  onChange,
+  errors,
+  user,
+  classes
 }) => (
-  <Card className="container">
+  <div>
+  <Card className={classes.container}>
     <form action="/" onSubmit={onSubmit}>
-      <h2 className="card-heading">Login</h2>
+      <h2 className={classes.cardHeading}>Login</h2>
 
-      {errors.summary && <p className="error-message">{errors.summary}</p>}
+      {errors.summary && <p className={classes.errorMessage}>{errors.summary}</p>}
 
-      <div className="field-line">
+      <div className={classes.fieldLine}>
         <TextField
           floatingLabelText="Email"
           name="email"
@@ -27,7 +50,7 @@ const LoginForm = ({
           value={user.email}
         />
       </div>
-      <div className="field-line">
+      <div className={classes.fieldLine}>
         <TextField
           floatingLabelText="Password"
           type="password"
@@ -37,19 +60,21 @@ const LoginForm = ({
           value={user.password}
         />
       </div>
-      <div className="button-line">
-        <RaisedButton type="submit" label="Log in" primary />
+      <div className={classes.buttonLine}>
+        <Button raised type="submit" primary>Login</Button>
       </div>
-      <CardText>Don't have an account? <Link to={'/signup'}>Create one</Link>.</CardText>
+      <CardContent>Don't have an account? <Link to={'/signup'}>Create one</Link>.</CardContent>
     </form>
   </Card>
+  </div>
 );
 
 LoginForm.propTypes = {
-    onSubmit: PropTypes.func.isRequired,
-    onChange: PropTypes.func.isRequired,
-    errors: PropTypes.object.isRequired,
-    user: PropTypes.object.isRequired
+  onSubmit: PropTypes.func.isRequired,
+  onChange: PropTypes.func.isRequired,
+  errors: PropTypes.object.isRequired,
+  user: PropTypes.object.isRequired,
+  classes: PropTypes.object.isRequired,
 };
 
-export default LoginForm;
+export default withStyles(styles)(LoginForm);

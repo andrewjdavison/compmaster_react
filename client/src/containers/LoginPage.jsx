@@ -2,7 +2,6 @@ import React from 'react';
 import LoginForm from '../components/LoginForm.jsx';
 import Auth from '../modules/Auth.js';
 
-
 class LoginPage extends React.Component {
 
   /**
@@ -17,7 +16,7 @@ class LoginPage extends React.Component {
       user: {
         email: '',
         password: ''
-      }
+      },
     };
 
     this.processForm = this.processForm.bind(this);
@@ -97,7 +96,6 @@ class LoginPage extends React.Component {
       />
     );
   }
-
 }
 
 export default LoginPage;

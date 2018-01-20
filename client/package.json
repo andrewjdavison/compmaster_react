@@ -3,15 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "material-ui": "^0.19.4",
+    "material-ui": "^1.0.0-beta.21",
+    "material-ui-icons": "^1.0.0-beta.17",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
+    "react-redux": "^5.0.6",
     "react-responsive-carousel": "^3.1.28",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.14",
     "react-tap-event-plugin": "^3.0.2",
-    "validator": "^9.0.0"
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0",
+    "typeface-roboto": "^0.0.45",
+    "validator": "^9.0.0",
+    "whatwg-fetch": "^2.0.3"
   },
   "scripts": {
     "start": "PORT=4300 react-scripts start",
@@ -19,5 +25,5 @@
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
-  "proxy": "http://10.10.1.7:3000"
+  "proxy": "https://10.10.1.7:3443"
 }

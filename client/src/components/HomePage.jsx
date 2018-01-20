@@ -5,6 +5,8 @@ import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 
 
+/*
+
 const sliderSettings = {
   dots: false,
   infinite: true,
@@ -17,6 +19,7 @@ const sliderSettings = {
   vertical: true,
 
 };
+*/
 
 const HomePage = () => (
   <div className="comp-container">
