@@ -41,7 +41,7 @@ export function competitionListFetchData(){
       return response;
     })
     .then((response)=>response.json())
-    .then((competitionList) => dispatch(competitionListFetchDataSuccess(competitionList)))
+    .then((response) => dispatch(competitionListFetchDataSuccess(response.activecompetitions)))
     .catch(() => dispatch(competitionListHasErrored));
   };
 }

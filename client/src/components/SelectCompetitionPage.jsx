@@ -4,7 +4,10 @@ import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
 //import { withStyles } from 'material-ui/styles';
 import SelectCompetitionTile from './SelectCompetitionTile.jsx';
-import { competitionListLoadTestData } from '../actions/competitionList.js';
+import  {
+          competitionListLoadTestData,
+          competitionListFetchData,
+        } from '../actions/competitionList.js';
 
 
 
@@ -31,7 +34,7 @@ const errors = {
 
 class SelectCompetitionForm extends Component {
   componentDidMount(){
-    //    this.props.loadTestData();
+    this.props.fetchCompetitionList();
   }
 
   render(){
@@ -52,6 +55,7 @@ class SelectCompetitionForm extends Component {
             })}
           </ul>
           <button onClick={this.props.addListItem}>Add Competition</button>
+          <button onClick={this.props.fetchCompetitionList}>Refresh</button>
         </Paper>
       </div>
     );
@@ -66,6 +70,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     loadTestData: () => dispatch(competitionListLoadTestData()),
     addListItem: () => dispatch(competitionListLoadTestData()),
+    fetchCompetitionList: () => dispatch(competitionListFetchData()),
 
   };
 

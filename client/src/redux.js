@@ -1,7 +1,10 @@
 import {
   combineReducers,
-  createStore
+  createStore,
+  applyMiddleware
 } from 'redux'
+
+import thunk from 'redux-thunk';
 
 import competitionReducer from './reducers/competitionReducer.js';
 
@@ -23,7 +26,7 @@ export const reducers = combineReducers({
 //store.js
 
 export function configureStore(){
-  const store = createStore(reducers);
+  const store = createStore(reducers, undefined, applyMiddleware(thunk));
   return store;
 };
 
