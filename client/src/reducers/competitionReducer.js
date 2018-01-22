@@ -1,19 +1,11 @@
-const testCompetitionListState = {
+const initialCompetitionListState = {
   isLoading: false,
   hasErrored: false,
-  competitions: [
-    {
-      name: 'Beerfast',
-      id: 1,
-    },
-    {
-      name: 'VicBrew',
-      id: 2,
-    }
-  ],
+  loaded: false,
+  competitions: [ ],
 };
 
-const competitionList = (state = testCompetitionListState, action) => {
+const competitionList = (state = initialCompetitionListState, action) => {
   switch (action.type) {
     case 'COMPETITION_LIST_HAS_ERRORED':
       return {
@@ -23,12 +15,14 @@ const competitionList = (state = testCompetitionListState, action) => {
     case 'COMPETITION_LIST_IS_LOADING':
       return {
         ...state,
-        isLoading: action.isLoading
+        isLoading: action.isLoading,
+        loaded: false
       };
     case 'COMPETITION_LIST_FETCH_DATA_SUCCESS':
       return {
         ...state,
-        competitions: action.competitionList
+        competitions: action.competitionList,
+        loaded: true
       };
     case 'COMPETITION_LIST_LOAD_TEST_DATA':
       console.log('Adding a new element');

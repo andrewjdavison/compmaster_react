@@ -33,8 +33,10 @@ const errors = {
 };
 
 class SelectCompetitionForm extends Component {
-  componentDidMount(){
-    this.props.fetchCompetitionList();
+  componentWillMount(){
+    if(!this.props.competitionList.loaded) {
+      this.props.fetchCompetitionList();
+    }
   }
 
   render(){
