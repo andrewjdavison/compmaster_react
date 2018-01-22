@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from 'react-redux';
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
-//import { withStyles } from 'material-ui/styles';
+import { withStyles } from 'material-ui/styles';
 import SelectCompetitionTile from './SelectCompetitionTile.jsx';
 import  {
           competitionListLoadTestData,
@@ -11,7 +11,6 @@ import  {
 
 
 
-/*
 const styles = theme => ({
   flex: {
     flex: 1,
@@ -22,7 +21,6 @@ const styles = theme => ({
     margin: theme.spacing.unit*3,
   }),
 });
-*/
 
 function onSelect(){
 
@@ -42,8 +40,8 @@ class SelectCompetitionForm extends Component {
   render(){
     return (
       <div>
-        <Paper className='root'  elevation={5}>
-          <Typography type="title" color="inherit" className='flex'>
+        <Paper className={this.props.classes.root}  elevation={5}>
+          <Typography type="title" color="inherit" className={this.props.classes.flex}>
             Select a competition
           </Typography>
           <ul>
@@ -85,4 +83,4 @@ const SelectCompetitionContainer = connect(
   mapDispatchToProps
 )(SelectCompetitionForm);
 
-export default SelectCompetitionContainer;
+export default withStyles(styles)(SelectCompetitionContainer);
