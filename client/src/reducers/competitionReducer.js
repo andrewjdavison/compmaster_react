@@ -13,7 +13,7 @@ const testCompetitionListState = {
   ],
 };
 
-const competitionReducer = (state = testCompetitionListState, action) => {
+const competitionList = (state = testCompetitionListState, action) => {
   switch (action.type) {
     case 'COMPETITION_LIST_HAS_ERRORED':
       return {
@@ -47,4 +47,4 @@ const competitionReducer = (state = testCompetitionListState, action) => {
   }
 };
 
-export default competitionReducer;
+export default competitionList;

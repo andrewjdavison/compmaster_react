@@ -63,7 +63,7 @@ class SelectCompetitionForm extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  competitionList: state.competitionReducer
+  competitionList: state.competitionList
 });
 
 const mapDispatchToProps = (dispatch) => {
