@@ -5,7 +5,9 @@ import { BrowserRouter, Route } from 'react-router-dom';
 //import Base from './components/Base.jsx';
 import HomePage from './components/HomePage.jsx';
 import SignUpPage from './containers/SignUpPage.jsx';
-import LoginPage from './containers/LoginPage.jsx';
+
+import LoginPage from './components/LoginPage.jsx';
+
 import LogoutPage from './containers/LogoutPage.jsx';
 import MenuAppBar from './components/MenuAppBar.jsx';
 import SelectCompetitionPage from './components/SelectCompetitionPage.jsx';

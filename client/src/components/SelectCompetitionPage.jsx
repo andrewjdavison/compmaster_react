@@ -76,8 +76,6 @@ const mapDispatchToProps = (dispatch) => {
 
 };
 
-//const SelectCompetitionPage =  withStyles(styles)(SelectCompetitionForm);
-
 const SelectCompetitionContainer = connect(
   mapStateToProps,
   mapDispatchToProps
