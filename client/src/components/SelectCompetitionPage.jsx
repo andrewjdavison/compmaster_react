@@ -22,8 +22,8 @@ const styles = theme => ({
   }),
 });
 
-function onSelect(){
-
+function onSelect(index){
+  console.log('Selected '+index);
 };
 
 const errors = {
@@ -32,9 +32,8 @@ const errors = {
 
 class SelectCompetitionForm extends Component {
   componentWillMount(){
-    if(!this.props.competitionList.loaded) {
+      console.log(this.props);
       this.props.fetchCompetitionList();
-    }
   }
 
   render(){

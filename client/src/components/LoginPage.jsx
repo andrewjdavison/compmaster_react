@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
+import PasswordField from 'material-ui-password-field';
+
+import {TextValidator, ValidatorForm} from 'react-material-ui-form-validator';
+
 
 import Typography from 'material-ui/Typography';
 import Paper from 'material-ui/Paper';
@@ -41,37 +45,84 @@ const errors = {
 };
 
 class LoginForm extends Component {
+  constructor(props){
+    super(props);
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.props.auth.authRequest={
+      password: '',
+      username: '',
+    };
+
+    this.state = {
+      submitted: false
+    };
+
+    this.handleEmailChange = this.handleEmailChange.bind(this);
+    this.handlePwdChange = this.handlePwdChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
   componentWillMount(){
   }
 
+  handleEmailChange(event){
+    console.log(this.props.auth.authRequest.username);
+    const email = event.target.value;
+    this.props.setUsername(email);
+  }
+
+  handlePwdChange(event){
+    console.log(this.props.auth.authRequest.password);
+    const password= event.target.value;
+    this.props.setPassword(password);
+  }
+
+  handleSubmit() {
+    this.setState({submitted:true},() => {
+      setTimeout(()=>this.setState({submitted:false}),5000);
+    });
+  }
+
   render(){
+    const {submitted} = this.state;
     return (
       <div>
         <Card className="container">
           <CardContent>
-            <form acion="/" onSubmit={this.props.authenticateUser}>
+            <ValidatorForm
+              ref="form"
+              onSubmit={this.props.authenticateUser}
+            >
               <h2 className="card-heading">Login</h2>
 
               {this.props.auth.errors.summary && <p className="error-message">{this.props.auth.errors.summary}</p>}
 
               <div className="field-line">
-                <TextField
+                <TextValidator
                   label="Email"
+                  onChange={this.handleEmailChange}
                   name="email"
-                  onChange={this.props.setUsername}
+                  value={this.props.auth.authRequest.username}
+                  validators={['required', 'isEmail']}
+                  errorMessages={['This field is required','email is not valid']}
                 />
               </div>
               <div className="field-line">
-                <TextField
-                  label="Password"
-                  onChange={this.props.setPassword}
+                <TextValidator
+                  label='Enter your password'
+                  name="password"
+                  type="password"
+                  onChange={this.handlePwdChange}
+                  value={this.props.auth.authRequest.password}
+                  validators={['required']}
+                  errorMessages={['You must provide you password']}
                 />
               </div>
               <div className="button-line">
                 <Button raised type="submit" color="primary">Sign In</Button>
               </div>
 
-            </form>
+            </ValidatorForm>
           </CardContent>
           <CardActions>
             <Typography className={this.props.classes.subtitle}>Don't have an account? </Typography><Button dense>Create one now</Button>
@@ -88,8 +139,8 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setUsername: (event) => dispatch(setUsername(event.target.value)),
-    setPassword: (event) => dispatch(setPassword(event.target.value)),
+    setUsername: (event) => { console.log(event);dispatch(setUsername(event)) },
+    setPassword: (password) => dispatch(setPassword(password)),
     authenticateUser: (event) => dispatch(authenticateUser(event)),
   };
 

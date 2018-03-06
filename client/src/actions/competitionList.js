@@ -32,6 +32,7 @@ export function competitionListFetchData(){
 
     fetch('/activecompetitions')
     .then((response)=> {
+      console.log(response);
       if(!response.ok){
         throw Error(response.statusText);
       }

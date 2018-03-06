@@ -11,7 +11,7 @@ import LoginPage from './components/LoginPage.jsx';
 import LogoutPage from './containers/LogoutPage.jsx';
 import MenuAppBar from './components/MenuAppBar.jsx';
 import SelectCompetitionPage from './components/SelectCompetitionPage.jsx';
-import CompetitionDetailsPage from  './containers/CompetitionDetailsPage.jsx';
+import CompetitionDetailPage from  './components/CompetitionDetailPage.jsx';
 
 import './App.css';
 
@@ -33,15 +33,12 @@ export default class App extends Component {
       <MuiThemeProvider theme={theme}>
         <BrowserRouter>
           <MenuAppBar>
-            <switch>
               <Route exact path="/" component={ HomePage }/>
               <Route path='/login' component={ LoginPage }/>
               <Route path='/signup' component={ SignUpPage }/>
               <Route path='/logout' component={ LogoutPage }/>
               <Route path='/selectcomp' component={ SelectCompetitionPage }/>
-              <Route path='/compdetails/:id' component={ CompetitionDetailsPage }/>
-
-            </switch>
+              <Route path='/compdetails/:id' component={ CompetitionDetailPage }/>
           </MenuAppBar>
         </BrowserRouter>
       </MuiThemeProvider>

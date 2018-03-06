@@ -27,6 +27,7 @@ export function authenticationSuccess(user){
 }
 
 export function setUsername(username){
+  console.log('Setting Username');
   return {
     type: 'SET_USERNAME',
     username

@@ -544,6 +544,9 @@ if(array_key_exists("c",$options)){
 
       $t1=-1; $t2=-1; $t3=-1; $t4=-1; $t5=-1; $t6=-1; $sn1=""; $sn2=""; $sn3=""; $sn4=""; $bn1=""; $bn2="";
 
+      if($row['discount3_data'] == '')
+        $row['discount3_data'] = 0;
+
       $values = [ $row["compinstid"], $row["compstate"], $row["instancetitle"], $row["address1"], $row["address2"], 
                   $row["city"], $row["state"], $row["postcode"],
                   $row["country"], $row["mapref"], '',$row["contactphone"], $row["contactemail"], 
@@ -623,7 +626,7 @@ if(array_key_exists("c",$options)){
   $compinstTable->finalise($conn);
 }
 print "Score Templates:\n";
-print print_r($compScoreTemplates,true);
+print_r($compScoreTemplates);
 
 
 // Migrate the compsponsor table, eliminating any rowsfor which no sponsor exists...
@@ -666,6 +669,7 @@ $sql = "SELECT * from compcategory";
 $result = $conn->query($sql);
 
 while($row = $result->fetch_assoc()){
+  print_r($row);
   if(!array_key_exists($row['categoryid'], $catSponsors)){
     $catSponsors[$row['categoryid']]=0;
   }
@@ -990,7 +994,9 @@ while($row = $result->fetch_assoc()){
     print("flightMapId: ".$flightMapId."\n");
      */
     $flightId = $flightMap[$flightMapId];
-    $sql = "UPDATE cmlive.`compjudge` SET flightId=".$flightId." WHERE id=".$row["id"];
+    $sql = "UPDATE cmlive.`compjudge` SET flightId=".$flightId." WHERE id='".$row["id"]."'";
+    print("SQL for flight ID:\n");
+    print($sql."\n\n");
     $res=$conn->query($sql);
     if($conn->error){
       die("Connection Failed: ".$conn->error."\n");

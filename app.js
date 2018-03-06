@@ -195,7 +195,7 @@ app.router.route('/auth')
 
 
 app.use('/api/1.0', api_1_0);
-app.use('Assets', express.static('Assets'));
+app.use('/Assets', express.static('Assets'));
 
 
 app.router.route('/filesign/:id/:bucket')

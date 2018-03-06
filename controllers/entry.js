@@ -335,14 +335,22 @@ class EntryController extends TableController {
         var promises=[];
 
         for(var compId in compEntries){
+          console.log('Additin promise for compId: ' + compId);
           promises.push(compInst.findOne({id:compId}));
         }
         return Promise.all(promises);
       })
       .then((result)=>{
+        console.log(result);
+        console.log("Result size: " + result.length);
+        console.log("Result 0 is ");
+        console.log(result[0]);
+
         var responseData={compentries:[]};
         for(var i=0;i<result.length;i++){
           var compData = {};
+          console.log(i);
+          console.log(result[i]);
           compData.id = result[i].id;
           compData.name=result[i].name;
           compData.scoreTemplate = result[i].scoresheetId;

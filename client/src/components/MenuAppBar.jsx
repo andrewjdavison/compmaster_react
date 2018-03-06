@@ -6,6 +6,8 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
+import List from 'material-ui/List';
+import Hidden from 'material-ui/Hidden';
 
 //import MenuIcon from 'material-ui-icons/Menu';
 
@@ -15,11 +17,57 @@ import { FormControlLabel, FormGroup } from 'material-ui/Form';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import Divider from 'material-ui/Divider';
 
+import Drawer from 'material-ui/Drawer';
+import { mainCompItems } from './DrawerItems.jsx';
+
+const drawerWidth=240;
+
 const styles = theme => ({
   root: {
     marginTop: theme.spacing.unit * 3,
     width: '100%',
+    zIndex: 1,
+    overflow: 'hidden',
   },
+  appFrame: {
+    position: 'relative',
+    display: 'flex',
+    width: '100%',
+    height: '100%'
+  },
+  appBar: {
+    position: 'absolute',
+    marginLeft: '0',
+    [theme.breakpoints.up('md')]:{
+      width: `calc(100%)px'`,
+    },
+  },
+  NavIconHide: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  drawerHeader: theme.mixins.toolbar,
+  drawerPaper: {
+    width: 250,
+    [theme.breakpoints.up('md')] : {
+      width: drawerWidth,
+      position: 'relative',
+      height: '100%',
+    },
+  },
+  content: {
+    backgroundColor: theme.palette.background.default,
+    width: '100%',
+    padding: theme.spacing.unit*3,
+    height: `calc(100%-56px)`,
+    marginTop: 56,
+    [theme.breakpoints.up('sm')]: {
+      height: `calc(100%-64px)`,
+      marginTop: 64,
+    },
+  },
+
   flex: {
     flex: 1,
   },
@@ -35,7 +83,13 @@ class MenuAppBar extends React.Component {
     auth: false,
     manager: false,
     anchorEl: null,
+    mobileOpen: false,
   };
+
+  handleDrawerToggle = () => {
+    this.setState({mobileOpen: !this.state.mobileOpen});
+  };
+
 
   handleRequestSignIn = (event ) => {
     this.setState({auth: true});
@@ -58,13 +112,23 @@ class MenuAppBar extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    const { classes, theme } = this.props;
     const { userIsAManager,auth, manager, anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
-    return (
+    const drawer = (
       <div>
-        <div className={classes.root}>
+        <div className={classes.drawerHeader}/>
+        <Divider />
+        <List>{mainCompItems}</List>
+        <Divider />
+      </div>
+    );
+
+
+    return (
+      <div className={classes.root}>
+        <div className={classes.appFrame}>
           {userIsAManager?(
             <FormGroup>
               <FormControlLabel
@@ -77,7 +141,7 @@ class MenuAppBar extends React.Component {
             <div />
             )
           }
-          <AppBar position="static">
+          <AppBar className={classes.appBar}  position="static">
             <Toolbar>
               {/*
               <IconButton className={classes.menuButton} color="contrast" aria-label="Menu">
@@ -121,9 +185,9 @@ class MenuAppBar extends React.Component {
             </Toolbar>
           </AppBar>
         </div>
-        <div className="App-frame">
-          {this.props.children}
-        </div>
+        <main className = {classes.content }>
+            {this.props.children}
+        </main>
       </div>
     );
   }
@@ -133,5 +197,5 @@ MenuAppBar.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MenuAppBar);
+export default withStyles(styles, {withTheme: true})(MenuAppBar);
 
