@@ -121,7 +121,7 @@ function allowCrossDomain(req,res,next){
     res.setHeader('Access-Control-Allow-Origin', origin);
   }
   res.setHeader('Access-Control-Allow-Origin', 'http://10.10.1.7:4300');
-  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization');
+  res.setHeader('Access-Control-Allow-Headers', 'X-Requested-With,Content-Type, Authorization, Origin');
 
   if(req.method === 'OPTIONS') {
     res.send(200);
@@ -130,9 +130,14 @@ function allowCrossDomain(req,res,next){
   }
 }
 
+
+
 var app = express();
 
 app.all('*', function(req, res, next){
+  console.log('\n\nRequest Body:');
+  console.log(req.body);
+
   if(process.env.NODE_ENV === 'production'){
     if(req.secure){
       return next();

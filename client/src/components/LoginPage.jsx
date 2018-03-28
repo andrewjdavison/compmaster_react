@@ -17,6 +17,7 @@ import  {
           setUsername,
           setPassword,
           authenticateUser,
+          resetAuth,
         } from '../actions/auth.js';
 
 
@@ -63,6 +64,8 @@ class LoginForm extends Component {
   }
 
   componentWillMount(){
+    this.props.resetAuth();
+
   }
 
   handleEmailChange(event){
@@ -77,10 +80,11 @@ class LoginForm extends Component {
     this.props.setPassword(password);
   }
 
-  handleSubmit() {
-    this.setState({submitted:true},() => {
-      setTimeout(()=>this.setState({submitted:false}),5000);
-    });
+  handleSubmit(event) {
+    event.preventDefault();
+
+    console.log('Submitting request for Username: '+this.props.auth.authRequest.username);
+    this.props.authenticateUser(this.props.auth.authRequest);
   }
 
   render(){
@@ -91,7 +95,7 @@ class LoginForm extends Component {
           <CardContent>
             <ValidatorForm
               ref="form"
-              onSubmit={this.props.authenticateUser}
+              onSubmit={this.handleSubmit}
             >
               <h2 className="card-heading">Login</h2>
 
@@ -103,8 +107,8 @@ class LoginForm extends Component {
                   onChange={this.handleEmailChange}
                   name="email"
                   value={this.props.auth.authRequest.username}
-                  validators={['required', 'isEmail']}
-                  errorMessages={['This field is required','email is not valid']}
+                  validators={['required']}
+                  errorMessages={['This field is required']}
                 />
               </div>
               <div className="field-line">
@@ -141,7 +145,8 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setUsername: (event) => { console.log(event);dispatch(setUsername(event)) },
     setPassword: (password) => dispatch(setPassword(password)),
-    authenticateUser: (event) => dispatch(authenticateUser(event)),
+    authenticateUser: (data) => dispatch(authenticateUser(data)),
+    resetAuth: (data)=> dispatch(resetAuth(data)),
   };
 
 };

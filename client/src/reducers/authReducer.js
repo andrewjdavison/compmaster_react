@@ -2,6 +2,7 @@
 const initialAuthorisationState = {
   authenticated: false,
   isAuthenticating: false,
+  token: undefined,
   user: undefined,
   authRequest: {
     username: undefined,
@@ -16,10 +17,24 @@ const initialAuthorisationState = {
 
 const auth = ( state = initialAuthorisationState, action) => {
   switch(action.type) {
+    case 'RESET_AUTH':
+      return {
+        ...state,
+        errors: {
+          summary: undefined,
+        },
+      };
     case 'AUTHENTICATION_HAS_ERRORED':
       return {
         ...state,
         hasErrored: action.hasErrored
+      };
+    case 'ERROR':
+      return {
+        ...state,
+        errors: {
+          summary: action.summary
+        }
       };
     case 'AUTHENTICATIING':
       return {
@@ -39,6 +54,9 @@ const auth = ( state = initialAuthorisationState, action) => {
           username: action.username,
           password: state.authRequest.password
         },
+        errors:{
+          summary: undefined
+        },
       };
     case 'SET_PASSWORD':
       return {
@@ -47,6 +65,14 @@ const auth = ( state = initialAuthorisationState, action) => {
           username: state.authRequest.username,
           password: action.password}
         ,
+        errors:{
+          summary: undefined
+        },
+      };
+    case 'SET_TOKEN':
+      return {
+        ...state,
+        token: action.token
       };
     default:
       return state;
