@@ -20,6 +20,10 @@ const auth = ( state = initialAuthorisationState, action) => {
     case 'RESET_AUTH':
       return {
         ...state,
+        authRequest:{
+          username:undefined,
+          password:undefined,
+        },
         errors: {
           summary: undefined,
         },
@@ -73,6 +77,11 @@ const auth = ( state = initialAuthorisationState, action) => {
       return {
         ...state,
         token: action.token
+      };
+    case 'SET_USER':
+      return {
+        ...state,
+        user: action.user
       };
     default:
       return state;

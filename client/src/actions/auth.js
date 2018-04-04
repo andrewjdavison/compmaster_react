@@ -57,6 +57,13 @@ export function setToken(token){
   };
 };
 
+export function setUser(user){
+  return {
+    type: 'SET_USER',
+    user
+  };
+};
+
 export function resetAuth(data){
   return {
     type: 'RESET_AUTH',
@@ -76,13 +83,21 @@ export function authenticateUser(data){
 
     post('/auth',data)
     .then((response)=>{
-      if(response.error==undefined){
-        dispatch(setToken(response.token));
+      if(response.error===undefined){
+        dispatch(setUser(response.body.user));
+        dispatch(setToken(response.body.token));
         dispatch(authenticated(true));
+        dispatch(resetAuth());
+
+        window.location = state.core.currentPage;
+
+
       } else {
         if(response.error.code ===401){
+          dispatch(authenticated(false));
           dispatch(errorMsg(response.error, "The username or password provided is not correct"));
         } else {
+          dispatch(authenticated(false));
           dispatch(errorMsg(response.error,'There was a server error. Please try again shortly'));
         }
       }
