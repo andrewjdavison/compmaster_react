@@ -1,18 +1,18 @@
 import React, { Component } from "react";
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+//import { Link } from 'react-router-dom';
 import Card, { CardActions, CardContent } from 'material-ui/Card';
 import Button from 'material-ui/Button';
-import TextField from 'material-ui/TextField';
-import PasswordField from 'material-ui-password-field';
+//import TextField from 'material-ui/TextField';
+//import PasswordField from 'material-ui-password-field';
 
 import {TextValidator, ValidatorForm} from 'react-material-ui-form-validator';
 
 
 import Typography from 'material-ui/Typography';
-import Paper from 'material-ui/Paper';
+//import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
-import SelectCompetitionTile from './SelectCompetitionTile.jsx';
+//import SelectCompetitionTile from './SelectCompetitionTile.jsx';
 import  {
           setUsername,
           setPassword,
@@ -37,13 +37,6 @@ const styles = theme => ({
   },
 });
 
-function onSubmit(){
-
-};
-
-const errors = {
-
-};
 
 class LoginForm extends Component {
   constructor(props){
@@ -66,6 +59,7 @@ class LoginForm extends Component {
   componentWillMount(){
     this.props.resetAuth();
 
+    console.log(this.props);
   }
 
   handleEmailChange(event){
@@ -85,10 +79,11 @@ class LoginForm extends Component {
 
     console.log('Submitting request for Username: '+this.props.auth.authRequest.username);
     this.props.authenticateUser(this.props.auth.authRequest);
+    console.log(this.props);
   }
 
   render(){
-    const {submitted} = this.state;
+    //    const {submitted} = this.state;
     return (
       <div>
         <Card className="container">
@@ -138,7 +133,8 @@ class LoginForm extends Component {
 }
 
 const mapStateToProps = (state, ownProps) => ({
-  auth: state.auth
+  auth: state.auth,
+  core: state.core,
 });
 
 const mapDispatchToProps = (dispatch) => {

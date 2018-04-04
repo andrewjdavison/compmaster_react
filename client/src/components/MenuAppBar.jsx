@@ -6,8 +6,8 @@ import Toolbar from 'material-ui/Toolbar';
 import Typography from 'material-ui/Typography';
 import IconButton from 'material-ui/IconButton';
 import Button from 'material-ui/Button';
-import List from 'material-ui/List';
-import Hidden from 'material-ui/Hidden';
+//import List from 'material-ui/List';
+//import Hidden from 'material-ui/Hidden';
 
 //import MenuIcon from 'material-ui-icons/Menu';
 
@@ -17,8 +17,8 @@ import { FormControlLabel, FormGroup } from 'material-ui/Form';
 import Menu, { MenuItem } from 'material-ui/Menu';
 import Divider from 'material-ui/Divider';
 
-import Drawer from 'material-ui/Drawer';
-import { mainCompItems } from './DrawerItems.jsx';
+//import Drawer from 'material-ui/Drawer';
+//import { mainCompItems } from './DrawerItems.jsx';
 
 const drawerWidth=240;
 
@@ -112,10 +112,12 @@ class MenuAppBar extends React.Component {
   };
 
   render() {
-    const { classes, theme } = this.props;
+    //    const { classes, theme } = this.props;
+    const { classes } = this.props;
     const { userIsAManager,auth, manager, anchorEl } = this.state;
     const open = Boolean(anchorEl);
 
+    /*
     const drawer = (
       <div>
         <div className={classes.drawerHeader}/>
@@ -124,7 +126,7 @@ class MenuAppBar extends React.Component {
         <Divider />
       </div>
     );
-
+    */
 
     return (
       <div className={classes.root}>
