@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Paper from 'material-ui/Paper';
+//import Paper from 'material-ui/Paper';
 import { withStyles } from 'material-ui/styles';
 import Typography from "material-ui/Typography";
 import Grid from 'material-ui/Grid';
@@ -10,6 +10,8 @@ import {
   resetStore,
   competitionDetailFetchData,
 } from '../actions/competitionDetail.js';
+
+import {setPage} from '../actions/core.js';
 
 
 const styles = theme => ({
@@ -31,8 +33,14 @@ const styles = theme => ({
 class CompetitionDetailForm extends Component {
   componentWillMount(){
     // Load the competition data fresh in case anything has changed
+    let uri = this.props.location.pathname;
+    console.log(uri);
+    this.props.setPage(uri);
+    let compId = this.props.match.params.id;
+    console.log(compId);
     console.log(this.props);
-    this.props.fetchCompetitionDetail(12);
+
+    this.props.fetchCompetitionDetail(compId);
 
   };
 
@@ -75,12 +83,15 @@ class CompetitionDetailForm extends Component {
 
 const mapStateToProps = (state, ownProps) => ({
   competitionDetail: state.competitionDetail,
+  core: state.core,
+  auth: state.auth,
 });
 
 const mapDispatchToProps = (dispatch) => {
   return {
     fetchCompetitionDetail: (id)=>dispatch(competitionDetailFetchData(id)),
-    resetStore: ()=>dispatch(resetStore())
+    resetStore: ()=>dispatch(resetStore()),
+    setPage: (uri)=>dispatch(setPage(uri)),
   };
 };
 
