@@ -2,11 +2,13 @@ import  { combineReducers } from 'redux';
 import competitionList from './competitionReducer.js';
 import auth from './authReducer.js';
 import competitionDetail from './competitionDetailReducer.js';
+import core from './coreReducer.js';
 
 const appReducer = combineReducers({
   competitionList,
   competitionDetail,
-  auth
+  auth,
+  core
 });
 
 const rootReducer = (state, action) => {
