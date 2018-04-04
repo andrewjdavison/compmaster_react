@@ -24,6 +24,8 @@ const styles = theme => ({
 
 function onSelect(index){
   console.log('Selected '+index);
+  window.location='compdetails/'+index;
+
 };
 
 const errors = {
