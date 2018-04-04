@@ -17,15 +17,18 @@ export function post(url, data){
 
   return fetch(url, config)
     .then((response) => {
-      if(response.status != 200){
+      if(response.status !== 200){
         throw new Error(response.status);
       }
-      postResponse.body = response.json();
+      return response.json();
+    })
+  .then((responseJSON)=>{
+      postResponse.body = responseJSON;
       return postResponse;
     })
   .catch((error)=>{
     console.log('error');
-    if(error.message==401){
+    if(error.message===401){
       postResponse.error={
         code:401,
         summary:'Unauthorised'
