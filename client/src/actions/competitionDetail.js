@@ -1,3 +1,5 @@
+import {get} from '../coreutil.js';
+
 export function competitionDetailHasErrored(bool){
   return {
     type: 'COMPETITION_DETAIL_LOAD_FAILED',
@@ -26,10 +28,10 @@ export function resetStore(){
 }
 
 export function competitionDetailFetchData(id){
+  let compData=undefined;
+
   return (dispatch) => {
     dispatch(competitionDetailIsLoading(true));
-
-    console.log('Loading competition');
 
     fetch('/compinsts/'+id)
     .then((response)=> {
@@ -42,7 +44,14 @@ export function competitionDetailFetchData(id){
       return response;
     })
     .then((response)=>response.json())
-    .then((response) => dispatch(competitionDetailFetchDataSuccess(response.compinsts[0])))
+    .then((jsonData)=> {
+      compData = jsonData.compinsts[0];
+      return get('/blurbs?compinstid='+compData.id);
+    })
+    .then((response)=>{
+      compData.blurbData = response.body.blurbs;
+    })
+    .then((response) => dispatch(competitionDetailFetchDataSuccess(compData)))
     .catch(() => dispatch(competitionDetailHasErrored));
   };
 }
