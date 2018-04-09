@@ -397,6 +397,9 @@ app.router.route('/blurbs/:id')
   .put(authenticate, function(req, res){blurbController.put(req,res);})
   .get(function(req, res){blurbController.find(req, res)});
 
+app.router.route('/blurbs')
+  .get(function(req, res){blurbController.find(req,res)});
+
 app.router.route('/flights/new/:id')
   .get(function(req, res){flightController.newFlight(req, res);});
 
