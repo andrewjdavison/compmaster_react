@@ -56,5 +56,20 @@ export function competitionDetailFetchData(id){
   };
 }
 
+export function setCompName(name){
+  console.log('Value is ',name);
+  return {
+    type: 'COMPETITION_SET_NAME',
+    name
+  };
+};
 
+export function setCompAddress(address, placeId){
+  console.log('Value is ',address, placeId);
+  return {
+    type: 'COMPETITION_SET_ADDRESS',
+    address,
+    placeId
+  };
+};
 

@@ -24,6 +24,26 @@ const competitionDetail= (state = initialCompetitionDetailState, action) => {
         competition: action.competitionDetail,
         loaded: true
       };
+    case 'COMPETITION_SET_NAME':
+      console.log('Setting name to ', action.name);
+      return {
+        ...state,
+        competition: {
+          ...state.competition,
+          name: action.name
+        }
+      };
+    case 'COMPETITION_SET_ADDRESS':
+      console.log('Setting Address to ', action.address);
+      return {
+        ...state,
+        competition: {
+          ...state.competition,
+          address1: action.address,
+          address2: action.placeId,
+        }
+      };
+
     default:
       return state;
   }

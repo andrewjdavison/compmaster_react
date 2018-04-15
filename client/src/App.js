@@ -12,6 +12,8 @@ import LogoutPage from './containers/LogoutPage.jsx';
 import MenuAppBar from './components/MenuAppBar.jsx';
 import SelectCompetitionPage from './components/SelectCompetitionPage.jsx';
 import CompetitionDetailPage from  './components/CompetitionDetailPage.jsx';
+import CompetitionEditorPage from './components/CompetitionEditorPage.jsx';
+
 
 import './App.css';
 
@@ -39,6 +41,8 @@ export default class App extends Component {
               <Route path='/logout' component={ LogoutPage }/>
               <Route path='/selectcomp' component={ SelectCompetitionPage }/>
               <Route path='/compdetails/:id' component={ CompetitionDetailPage }/>
+              <Route path='/compedit/:id' component={ CompetitionEditorPage }/>
+
           </MenuAppBar>
         </BrowserRouter>
       </MuiThemeProvider>
