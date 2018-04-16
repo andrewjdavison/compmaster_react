@@ -65,7 +65,7 @@ const styles = theme => ({
     borderStyle: 'solid',
     borderWidth: '2',
     borderColor: 'black',
-    height: '100%',
+    minHeight: '200px',
     width: '100%',
     position: 'relative',
     marginRight: '10px',
