@@ -73,3 +73,12 @@ export function setCompAddress(address, placeId){
   };
 };
 
+export function setCompLatLng(latLng){
+  console.log('Value is ',latLng);
+  return {
+    type: 'COMPETITION_SET_LATLNG',
+    latLng
+  };
+};
+
+

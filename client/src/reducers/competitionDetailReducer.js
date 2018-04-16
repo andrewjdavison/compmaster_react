@@ -43,6 +43,17 @@ const competitionDetail= (state = initialCompetitionDetailState, action) => {
           address2: action.placeId,
         }
       };
+    case 'COMPETITION_SET_LATLNG':
+      console.log('Setting LatLngto ', action.latLng);
+      return {
+        ...state,
+        competition: {
+          ...state.competition,
+          lat: action.latLng.lat,
+          lng: action.latLng.lng,
+        }
+      };
+
 
     default:
       return state;

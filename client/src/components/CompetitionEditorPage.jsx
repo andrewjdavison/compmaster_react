@@ -24,10 +24,11 @@ import PlacesAutocomplete,
     getLatLng,
   }  from 'react-places-autocomplete';
 
-//import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
+import { withScriptjs, withGoogleMap, GoogleMap, Marker } from 'react-google-maps';
 import {
   setCompName,
   setCompAddress,
+  setCompLatLng,
   resetStore,
   competitionDetailFetchData,
 } from '../actions/competitionDetail.js';
@@ -65,6 +66,9 @@ const styles = theme => ({
   addressInput: {
     display: 'inline-block',
   },
+  map: {
+    height: '100%',
+  },
 
 });
 
@@ -72,19 +76,14 @@ const styles = theme => ({
 class CompetitionEditorForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {address: 'San Fransisco, CA'};
-    this.onChange = (address) => this.setState({ address})
+    this.props.setCompLatLng({lat:37, lng:40});
+
+    this._loadingElement = <div>LOADING</div>;
+    this._containerElement = <div className={styles.root} />;
+    this._mapElement = <div className={{height: `100%`}} />;
   }
 
   componentWillMount(){
-    // Add the googlemapsapi
-    /*
-    const script = document.createElement("script");
-    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyCXhtOn0IgnLwXxNr2nCQP5uLvgS3TY8og&libraries=places";
-    script.async = true;
-
-    document.body.appendChild(script);
-    */
 
     // Set the page URI in case we get redirected to authenticate
     let uri = this.props.location.pathname;
@@ -93,6 +92,8 @@ class CompetitionEditorForm extends Component {
     // Load the competition data fresh in case anything has changed
     let compId = this.props.match.params.id;
     this.props.fetchCompetitionDetail(compId);
+    this.props.setCompLatLng({lat:37, lng:40});
+
 
 
   };
@@ -100,9 +101,14 @@ class CompetitionEditorForm extends Component {
   handleAddressSubmit = (event) => {
     event.preventDefault();
 
-    geocodeByAddress(this.state.address)
+    console.log('Looking up ', this.props.competitionDetail.competition.address1);
+    geocodeByAddress(this.props.competitionDetail.competition.address1)
       .then(results => getLatLng(results[0]))
-      .then(latLng => console.log('Success', latLng))
+      .then(latLng => {
+        console.log('Success', latLng)
+        this.props.setCompLatLng(latLng);
+        console.log(this.props.competitionDetail.competition);
+      })
       .catch(error => console.error('Error', error));
   }
 
@@ -133,17 +139,45 @@ class CompetitionEditorForm extends Component {
     const {classes} = this.props;
     const addressFieldStyle = classes.addressField;
 
-    const inputProps = {
-      value: this.state.address,
-      onChange: this.onChange,
-    }
-
     const textFieldProps = {
       label: 'Competition Address',
       className: classes.addressField,
       value: compData.address1,
       onChange: this.handleAddressChange(),
     }
+
+      /*
+    const SearchGoogleMap = withScriptjs(
+      withGoogleMap((props) =>
+        <div><h2>map</h2>
+          <GoogleMap
+            defaultZoom={14}
+            defaultCenter={{lat:-34.397, lng:150.644}}
+          >
+
+
+          </GoogleMap>
+        </div>
+      )
+    );
+    */
+
+
+    const SearchGoogleMap =
+        withScriptjs(
+          withGoogleMap((props) =>
+            <div><h2>map</h2>
+              <GoogleMap
+                defaultZoom={14}
+                defaultCenter={{lat:-34.397, lng:150.644}}
+              >
+
+
+              </GoogleMap>
+            </div>
+          )
+      )
+
 
 
     return (
@@ -171,9 +205,27 @@ class CompetitionEditorForm extends Component {
                         onSuggestionSelected={this.onSuggestionSelected}
                         renderTarget={() => (<div />)}
                         />
+                        <h1>break</h1>
+                        <Button
+                          raised
+                          color="primary"
+                          onClick={this.handleAddressSubmit}
+                        >
+                          Make a Google Map
+                        </Button>
                       </div>
                       <div className={classes.mapBuilder}>
-                        <VenueMap />
+
+                        <SearchGoogleMap
+                          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCXhtOn0IgnLwXxNr2nCQP5uLvgS3TY8og"
+                          loadingElement={this._loadingElement}
+                          containerElement={this._containerElement}
+                          mapElement = {this._mapElement}
+                        >
+
+
+                        </SearchGoogleMap>
+
                       </div>
                     </div>
                   </Grid>
@@ -186,10 +238,6 @@ class CompetitionEditorForm extends Component {
                 <h1>Hello</h1>
                 <h1>Hello</h1>
               </Card>
-            </Grid>
-            <Grid item xs={12} sm={4} lg={4}>
-              <div>
-                </div>
             </Grid>
           </Grid>
         </form>
@@ -208,6 +256,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     setCompName: (name) => {dispatch(setCompName(name)) },
     setCompAddress: (address, placeId) => {dispatch(setCompAddress(address, placeId)) },
+    setCompLatLng: (latLng) => {dispatch(setCompLatLng(latLng)) },
     fetchCompetitionDetail: (id)=>dispatch(competitionDetailFetchData(id)),
     resetStore: ()=>dispatch(resetStore()),
     setPage: (uri)=>dispatch(setPage(uri)),
