@@ -79,7 +79,7 @@ class CompetitionDetailForm extends Component {
           <Grid item xs={12} sm={8} lg={8}>
             <Card raised className={this.props.classes.card}>
               <CardMedia className={this.props.classes.media}>
-                <img src={bannerImg} style={imgStyle}/>
+                <img alt={compData.name} src={bannerImg} style={imgStyle}/>
               </CardMedia>
               <CardContent>
                 <Typography type="display1" color="inherit" className={this.props.classes.flex}>
@@ -122,13 +122,13 @@ class CompetitionDetailForm extends Component {
                             Who to contact for more information:
                           </Typography>
                           <Typography type="body1" color="inherit" className={this.props.classes.flex}>
-                            {compData.contactName !="" &&
+                            {compData.contactName !=="" &&
                               <div>{compData.contactName}<br/></div>
                             }
-                            {compData.contactPhone !="" &&
+                            {compData.contactPhone !=="" &&
                               <div>Phone: {compData.contactPhone}<br/></div>
                             }
-                            {compData.contactEmail !="" &&
+                            {compData.contactEmail !=="" &&
                                 <div>Email: <a href="mailto:email{compData.contactEmail}">{compData.contactEmail}</a><br/></div>
                             }
                           </Typography>

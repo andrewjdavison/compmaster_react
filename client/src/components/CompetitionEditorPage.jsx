@@ -62,6 +62,13 @@ const styles = theme => ({
   },
   mapBuilder: {
     display:'inline-block',
+    borderStyle: 'solid',
+    borderWidth: '2',
+    borderColor: 'black',
+    height: '100%',
+    width: '100%',
+    position: 'relative',
+    marginRight: '10px',
   },
   addressInput: {
     display: 'inline-block',
@@ -71,7 +78,6 @@ const styles = theme => ({
   },
 
 });
-
 
 class CompetitionEditorForm extends Component {
   constructor(props) {
@@ -92,22 +98,21 @@ class CompetitionEditorForm extends Component {
     // Load the competition data fresh in case anything has changed
     let compId = this.props.match.params.id;
     this.props.fetchCompetitionDetail(compId);
-    this.props.setCompLatLng({lat:37, lng:40});
-
-
-
+    geocodeByAddress(this.props.competitionDetail.competition.address1)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        this.props.setCompLatLng(latLng);
+      })
+      .catch(error => console.error('Error', error));
   };
 
   handleAddressSubmit = (event) => {
     event.preventDefault();
 
-    console.log('Looking up ', this.props.competitionDetail.competition.address1);
     geocodeByAddress(this.props.competitionDetail.competition.address1)
       .then(results => getLatLng(results[0]))
       .then(latLng => {
-        console.log('Success', latLng)
         this.props.setCompLatLng(latLng);
-        console.log(this.props.competitionDetail.competition);
       })
       .catch(error => console.error('Error', error));
   }
@@ -117,19 +122,22 @@ class CompetitionEditorForm extends Component {
   }
 
   handleChange = name => event => {
-    console.log(name);
-    console.log(event.target.value);
     this.props.setCompName(event.target.value);
   }
 
   handleAddressChange = name =>  event => {
-    console.log('Address', event.target.value);
     this.props.setCompAddress(event.target.value);
   }
 
   onSuggestionSelected = suggestion => {
-    console.log('Selected Suggestion:', suggestion);
     this.props.setCompAddress(suggestion.description, suggestion.place_id);
+    geocodeByAddress(suggestion.description)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        this.props.setCompLatLng(latLng);
+      })
+      .catch(error => console.error('Error', error));
+
   }
 
 
@@ -146,50 +154,14 @@ class CompetitionEditorForm extends Component {
       onChange: this.handleAddressChange(),
     }
 
-      /*
-    const SearchGoogleMap = withScriptjs(
-      withGoogleMap((props) =>
-        <div><h2>map</h2>
-          <GoogleMap
-            defaultZoom={14}
-            defaultCenter={{lat:-34.397, lng:150.644}}
-          >
-
-
-          </GoogleMap>
-        </div>
-      )
-    );
-    */
-
-
-    const SearchGoogleMap =
-        withScriptjs(
-          withGoogleMap((props) =>
-            <div><h2>map</h2>
-              <GoogleMap
-                defaultZoom={14}
-                defaultCenter={{lat:-34.397, lng:150.644}}
-              >
-
-
-              </GoogleMap>
-            </div>
-          )
-      )
-
-
-
     return (
-
-
       <div>
         <form onSubmit={this.handleFormSubmit}>
           <Grid container>
             <Grid item xs={12} sm={8} lg={8}>
               <Card raised className={this.props.classes.card}>
                 <Grid container>
-                  <Grid item xs={12} sm={4} lg={4}>
+                  <Grid item xs={12} sm={8} lg={8}>
                     <TextField
                       id="name"
                       label="Name"
@@ -205,29 +177,13 @@ class CompetitionEditorForm extends Component {
                         onSuggestionSelected={this.onSuggestionSelected}
                         renderTarget={() => (<div />)}
                         />
-                        <h1>break</h1>
-                        <Button
-                          raised
-                          color="primary"
-                          onClick={this.handleAddressSubmit}
-                        >
-                          Make a Google Map
-                        </Button>
-                      </div>
-                      <div className={classes.mapBuilder}>
-
-                        <SearchGoogleMap
-                          googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyCXhtOn0IgnLwXxNr2nCQP5uLvgS3TY8og"
-                          loadingElement={this._loadingElement}
-                          containerElement={this._containerElement}
-                          mapElement = {this._mapElement}
-                        >
-
-
-                        </SearchGoogleMap>
-
                       </div>
                     </div>
+                  </Grid>
+                  <Grid item xs={12} s={4} lg={4}>
+                      <div className={classes.mapBuilder}>
+                        <VenueMap />
+                      </div>
                   </Grid>
                 </Grid>
                 <h1>Hello</h1>
