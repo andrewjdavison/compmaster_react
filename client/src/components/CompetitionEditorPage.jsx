@@ -13,6 +13,10 @@ import VenueMap from './VenueMap.jsx';
 
 import MUIPlacesAutocomplete from 'mui-places-autocomplete';
 
+import { DateTimePicker } from 'material-ui-pickers';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
+
 import Button from 'material-ui/Button';
 
 
@@ -140,6 +144,9 @@ class CompetitionEditorForm extends Component {
 
   }
 
+  handleDateChange = (date) => {
+    console.log(date);
+  }
 
 
   render() {
@@ -153,6 +160,9 @@ class CompetitionEditorForm extends Component {
       value: compData.address1,
       onChange: this.handleAddressChange(),
     }
+
+    let date=undefined;
+
 
     return (
       <div>
@@ -178,6 +188,13 @@ class CompetitionEditorForm extends Component {
                         renderTarget={() => (<div />)}
                         />
                       </div>
+                    </div>
+                    <div>
+                      <DateTimePicker
+                        label="Start date"
+                        onChange={this.handleDateChange}
+                        value={date}
+                      />
                     </div>
                   </Grid>
                   <Grid item xs={12} s={4} lg={4}>

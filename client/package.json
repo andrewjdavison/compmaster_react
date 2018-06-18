@@ -3,10 +3,12 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "date-fns": "^2.0.0-alpha.7",
     "google-maps-react": "^2.0.0",
     "material-ui": "^1.0.0-beta.21",
     "material-ui-icons": "^1.0.0-beta.17",
     "material-ui-password-field": "^2.0.0-0",
+    "material-ui-pickers": "^1.0.0-rc.6",
     "moment-timezone": "^0.5.14",
     "mui-places-autocomplete": "^1.4.0",
     "react": "^16.0.0",

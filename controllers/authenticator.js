@@ -15,26 +15,31 @@ passport.use(new Strategy(
       password: password.trim()
     };
 
+    console.log('Authenticating...');
     console.log('Username: ' + userData.username);
     console.log('Password: ' + userData.password);
 
-    auth.findOne({username:userData.username})
+    auth.findOne({email:userData.username})
     .then((result)=>{
       console.log(result);
       if((!result)||(result==null)) {
        throw new Error('Couldn\'t locate user');
       }
-      auth.lastLogin = moment(auth.lastLogin).format('YYYY-MM-DD H:mm:ss');
+      console.log('Last Login: '+ auth.lastLogin);
+      auth.lastLogin = moment(auth.lastLogin, moment.ISO_8601).format('YYYY-MM-DD H:mm:ss');
+      console.log('Last Login: '+ auth.lastLogin);
       auth.lastLoginAttempt = moment().format('YYYY-MM-DD H:mm:ss');;
       return auth.save();
     })
     .then((res)=> {
+      console.log('Verifying Password');
       return auth.verifyPassword(userData.password);
     })
     .then((res)=> {
       if(!res){
         throw new Error('Couldn\'t verify password');
       }
+      console.log('Verified Password');
       auth.lastLogin = moment(auth.lastLogin, "YYYY-MM-DD H:mm:ss").format('YYYY-MM-DD H:mm:ss');
       auth.lastLoginAttempt = moment().format('YYYY-MM-DD H:mm:ss');
       auth.loginAttempts=0;
@@ -49,15 +54,14 @@ passport.use(new Strategy(
       done(null, returnObj);
     })
     .catch((err)=>{
-      auth.lastLogin = moment(auth.lastLogin).format('YYYY-MM-DD H:mm:ss');
+      console.log(err.name + ' (' + err.message + ')');
+//      auth.lastLogin = moment(auth.lastLogin).format('YYYY-MM-DD H:mm:ss');
       auth.lastLoginAttempt = moment().format('YYYY-MM-DD H:mm:ss');
       auth.loginAttempts = auth.loginAttempts+1;
 
       if(auth.id!=null){
-        console.log(auth);
         auth.save()
       }
-      console.log('Failing?');
       done(null, false, { message: 'Login attempt failed' });
     });
   }

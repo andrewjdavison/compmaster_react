@@ -7,7 +7,8 @@ var User = rootRequire('models/user');
 var responder = rootRequire('common/responder');
 var request = require('superagent');
 var nodemailer=require('nodemailer');
-var transporter = nodemailer.createTransport(config.mail.transport);
+//var transporter = nodemailer.createTransport(config.mail.transport);
+var transporter = nodemailer.createTransport(config.mailTransportOptions);
 var bcrypt = require('bcryptjs');
 
 var generatePassword = require('password-generator');
@@ -74,9 +75,11 @@ class ResetController {
 
     console.log('Reset Post');
 
+//    console.log('request body',req.body);
     user.findOne({email: req.body.email})
     .then((result)=> {
       theUser=result;
+ //     console.log('User Data found',theUser);
       if(result === null){
         responder.httpRespond(res, {code: responder.EMAIL_NOT_FOUND, detail:{}});
       }

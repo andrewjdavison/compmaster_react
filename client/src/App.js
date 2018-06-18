@@ -14,6 +14,9 @@ import SelectCompetitionPage from './components/SelectCompetitionPage.jsx';
 import CompetitionDetailPage from  './components/CompetitionDetailPage.jsx';
 import CompetitionEditorPage from './components/CompetitionEditorPage.jsx';
 
+import DateFnsUtils from 'material-ui-pickers/utils/date-fns-utils';
+import MuiPickersUtilsProvider from 'material-ui-pickers/utils/MuiPickersUtilsProvider';
+
 
 import './App.css';
 
@@ -33,18 +36,20 @@ export default class App extends Component {
     return (
 
       <MuiThemeProvider theme={theme}>
-        <BrowserRouter>
-          <MenuAppBar>
-              <Route exact path="/" component={ HomePage }/>
-              <Route path='/login' component={ LoginPage }/>
-              <Route path='/signup' component={ SignUpPage }/>
-              <Route path='/logout' component={ LogoutPage }/>
-              <Route path='/selectcomp' component={ SelectCompetitionPage }/>
-              <Route path='/compdetails/:id' component={ CompetitionDetailPage }/>
-              <Route path='/compedit/:id' component={ CompetitionEditorPage }/>
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          <BrowserRouter>
+            <MenuAppBar>
+                <Route exact path="/" component={ HomePage }/>
+                <Route path='/login' component={ LoginPage }/>
+                <Route path='/signup' component={ SignUpPage }/>
+                <Route path='/logout' component={ LogoutPage }/>
+                <Route path='/selectcomp' component={ SelectCompetitionPage }/>
+                <Route path='/compdetails/:id' component={ CompetitionDetailPage }/>
+                <Route path='/compedit/:id' component={ CompetitionEditorPage }/>
 
-          </MenuAppBar>
-        </BrowserRouter>
+            </MenuAppBar>
+          </BrowserRouter>
+        </MuiPickersUtilsProvider>
       </MuiThemeProvider>
     );
   }

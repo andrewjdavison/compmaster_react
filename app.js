@@ -190,7 +190,9 @@ app.use(allowCrossDomain);
 app.use(passport.initialize());
 app.router.route('/auth')
   .post(
+    function(req,res,next){console.log('Authenticating!!!');next()},
     passport.authenticate('local', { session: false , scope: []}),
+    function(req,res,next){console.log('Authenticating!!!');next()},
     authController.serializeUser,
     authController.serializeClient,
     authController.generateToken,

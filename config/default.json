@@ -37,6 +37,13 @@
    "transport":"smtp://support@compmaster.com.au:ut0DeUPawGap16LApT8wCjK7AC3Tmw@smtp.gmail.com",
    "transport2":"smtps://appmailer%40davison-family.com:krW8SaB2Z2X8p96U@smtp.gmail.com"
   },
+  "mailTransportOptions":{
+    "service": "gmail",
+    "auth": {
+      "user": "support@compmaster.com.au",
+      "pass": "br3w4life"
+    }
+  },
   "client":{
     "url": "http://10.10.1.7:4300"
   },

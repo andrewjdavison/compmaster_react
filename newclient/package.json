@@ -1,0 +1,39 @@
+{
+  "name": "newclient",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@material-ui/core": "^1.2.0",
+    "@material-ui/icons": "^1.1.0",
+    "connected-react-router": "^4.3.0",
+    "dotenv": "^6.0.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "react": "^16.4.0",
+    "react-async-script": "^0.9.1",
+    "react-dom": "^16.4.0",
+    "react-form-validator-core": "^0.4.4",
+    "react-ga": "^2.5.3",
+    "react-google-recaptcha": "^0.11.1",
+    "react-material-ui-form-validator": "^2.0.0-beta.10",
+    "react-persist": "^1.0.2",
+    "react-redux": "^5.0.7",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "1.1.4",
+    "redux": "^4.0.0",
+    "redux-persist": "^5.10.0",
+    "redux-thunk": "^2.3.0",
+    "typeface-roboto": "^0.0.54"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "https://10.10.1.7:3443",
+  "devDependencies": {
+    "enzyme": "^3.3.0",
+    "react-test-renderer": "^16.4.0"
+  }
+}

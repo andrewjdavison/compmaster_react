@@ -6,17 +6,18 @@ var Auth = rootRequire('models/auth');
 var User = rootRequire('models/user');
 var responder = rootRequire('common/responder');
 var nodemailer=require('nodemailer');
-var transporter = nodemailer.createTransport(config.mail.transport);
+//var transporter = nodemailer.createTransport(config.mail.transport);
+var transporter = nodemailer.createTransport(config.mailTransportOptions);
 var KeyGenerator = require('uid-generator');
 var keygen = new KeyGenerator(256, KeyGenerator.BASE62);
-var bcrypt = require('bcryptjs');
-
 var Promise = this.Promise || require('promise');
 var agent = require('superagent-promise')(require('superagent'),Promise);
 
 
 var request = require('superagent');
 var generatePassword = require('password-generator');
+
+var bcrypt = require('bcryptjs');
 
 var mailpart1 = ' <!DOCTYPE html> <html lang="en"> <head> <meta charset="utf-8"> <meta name="generator" content="CoffeeCup HTML Editor (www.coffeecup.com)">'+
                 '<meta name="dcterms.created" content="Sat, 14 May 2016 10:06:35 GMT"> <meta name="description" content="">'+
@@ -144,7 +145,7 @@ class SignupController {
     var email = req.body.email;
     var password = req.body.password;
     var recaptcha = req.body.recaptcha;
-    var activationCode = keygen.generateKey();
+    var activationCode = keygen.generateSync();
 
 
     var auth = new Auth();
@@ -156,6 +157,8 @@ class SignupController {
         secret: config.recaptcha.secret,
         response: req.body.recaptcha
     };
+
+    console.log('Checking Params');
 
     if(!("email" in req.body)){
         console.log('No Email in signup request');

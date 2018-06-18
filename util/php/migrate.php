@@ -284,6 +284,28 @@ if(array_key_exists("u",$options)){
         $row['judge_level'] = 0;
       }
 
+      if(array_key_exists("t",$options)){
+        if(($row["drupal_user_id"] == 11)||($row["drupal_user_id"]==14476)){
+          $row["pass"] = '$2a$10$UZOh0knWJ3bBewMIkLs/a.SGtNaMVQmOWWbbthVsNKJ0OdEMG2Rli';
+          $row["activationCode"]="";
+          $row["email"] = "offers@davison-family.com";
+
+        } else {
+          $row["activationCode"]='0';
+        }
+        if(($row["drupal_user_id"] == 939)){
+          $row["email"] = "offers1@davison-family.com";
+        }
+        if(($row["drupal_user_id"] == 14405)){
+          $row["email"] = "andy1@davison-family.com";
+        }
+        if(($row["drupal_user_id"] == 11)){
+          $row["email"] = "andy@davison-family.com";
+        }
+        if(($row["drupal_user_id"] == 11)){
+          $row["email"] = "andy@davison-family.com";
+        }
+      }
       
       $values = array($row["drupal_user_id"], 
         $row["first_name"], $row["last_name"], $row["street_1"],
@@ -299,20 +321,15 @@ if(array_key_exists("u",$options)){
       $escapedValues = escapeValues($conn,array($userId, $row['judge_level'], $row['judge_id']));
       $accreditationTable->insert($conn,$escapedValues); 
 
-      if(array_key_exists("t",$options)){
-        if(($row["drupal_user_id"] == 11)||($row["drupal_user_id"]==14476)){
-          $row["pass"] = '$2a$10$UZOh0knWJ3bBewMIkLs/a.SGtNaMVQmOWWbbthVsNKJ0OdEMG2Rli';
-          $row["activationCode"]="";
-        } else {
-          $row["activationCode"]='0';
-        }
-      }
       if($row['looks_phoney']){
         $row['looks_phoney']=1;
       } else {
         $row['looks_phoney']=0;
       }
-      $values = array($row["drupal_user_id"], $row["username"], $row["pass"],
+      if($row["email"] == ''){
+        $row["email"] = $row["username"];
+      }
+      $values = array($row["drupal_user_id"], $row["username"], $row["email"], $row["pass"],
         $row["usertype"], $row["looks_phoney"],
         $row["looks_phoney"], "0", "2000-01-01 00:00:00",
         "2000-01-01 00:00:00", "0" ,$row['activationCode']);
