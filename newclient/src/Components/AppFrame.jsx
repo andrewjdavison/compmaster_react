@@ -21,6 +21,7 @@ import Login from './Login.jsx';
 import Home from './Home.jsx';
 import PasswordReset from './PasswordReset.jsx';
 import Signup from './Signup.jsx';
+import Profile from './Profile.jsx';
 
 import MenuIcon from '@material-ui/icons/Menu';
 import InboxIcon from '@material-ui/icons/Inbox';
@@ -181,6 +182,7 @@ class AppFrame extends Component {
                                 <Route exact path='/signin' component={Login} />
                                 <Route exact path='/passwordreset' component={PasswordReset} />
                                 <Route exact path='/signup' component={Signup} />
+                                <Route exact path='/Profile' component={Profile} />
                             </Switch>
                         </ConnectedRouter>
                     </main>
